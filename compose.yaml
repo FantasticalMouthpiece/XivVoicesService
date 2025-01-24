@@ -1,0 +1,6 @@
+﻿services:
+  xivvoicesservice:
+    image: xivvoicesservice
+    build:
+      context: .
+      dockerfile: XivVoicesService/Dockerfile
