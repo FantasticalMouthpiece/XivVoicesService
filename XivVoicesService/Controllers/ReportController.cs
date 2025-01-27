@@ -19,6 +19,18 @@ public class ReportController(ILogger<ReportController> logger, IReportRepositor
         return Ok(results);
     }
 
+    [HttpGet]
+    [Route($"{{reportId}}", Name = "GetReport")]
+    [ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetReport(string reportId)
+    {
+        var results = await reportRepository.GetReport(reportId);
+
+        if (results is null) return NotFound();
+        
+        return Ok(results);
+    }
+
     [HttpPost(Name = "CreateReport")]
     [
         ProducesResponseType(StatusCodes.Status201Created),
