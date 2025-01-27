@@ -1,35 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using XivVoicesService.DTOs.Report;
 using XivVoicesService.Models;
 
 namespace XivVoicesService.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ReportController(ILogger<ReportController> logger, ReportDbContext reportDbContext) : ControllerBase
+public class ReportController(ILogger<ReportController> logger, IReportRepository reportRepository) : ControllerBase
 {
     private readonly ILogger<ReportController> _logger = logger;
 
     [HttpGet(Name = "GetReports")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetReports()
     {
-        var result = await reportDbContext.Reports.Select(report => new Report
-        {
-            Id = report.Id,
-            Body = report.Body,
-            Eyes = report.Eyes,
-            Folder = report.Folder,
-            Gender = report.Gender,
-            Race = report.Race,
-            Sentence = report.Sentence,
-            Speaker = report.Speaker,
-            Tribe = report.Tribe,
-            User = report.User,
-            NpcId = report.NpcId,
-            SkeletonId = report.SkeletonId,
-            Comment = report.Comment,
-        }).ToListAsync();
+        var results = await reportRepository.GetReports();
         
-        return Ok(result);
+        return Ok(results);
+    }
+
+    [HttpPost(Name = "CreateReport")]
+    [
+        ProducesResponseType(StatusCodes.Status201Created),
+        ProducesResponseType(StatusCodes.Status400BadRequest)
+    ]
+    public async Task<IActionResult> CreateReport([FromBody] ReportCreateDTO report)
+    {
+        var results = await reportRepository.AddReport(report);
+        
+        return CreatedAtAction(nameof(GetReports), new { reportId = results.Id }, results);
     }
 }

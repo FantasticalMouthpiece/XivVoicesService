@@ -1,15 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace XivVoicesService.DTOs.Report;
 
-namespace XivVoicesService.Models;
-
-public class Report
+public class ReportCreateDTO
 {
-    [ScaffoldColumn(false)]
-    public required string Id { get; set; }
     public required string Speaker { get; set; }
     public required string Sentence { get; set; }
-    public required string NpcId { get; set; }
-    public required string SkeletonId { get; set; }
+    public required int NpcId { get; set; }
+    public required int SkeletonId { get; set; }
     public required string Body { get; set; }
     public required string Gender { get; set; }
     public required string Race { get; set; }

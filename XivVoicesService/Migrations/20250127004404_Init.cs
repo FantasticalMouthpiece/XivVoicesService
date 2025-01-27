@@ -5,7 +5,7 @@
 namespace XivVoicesService.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,8 @@ namespace XivVoicesService.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     Speaker = table.Column<string>(type: "text", nullable: false),
                     Sentence = table.Column<string>(type: "text", nullable: false),
-                    NpcId = table.Column<string>(type: "text", nullable: false),
-                    SkeletonId = table.Column<string>(type: "text", nullable: false),
+                    NpcId = table.Column<int>(type: "integer", nullable: false),
+                    SkeletonId = table.Column<int>(type: "integer", nullable: false),
                     Body = table.Column<string>(type: "text", nullable: false),
                     Gender = table.Column<string>(type: "text", nullable: false),
                     Race = table.Column<string>(type: "text", nullable: false),

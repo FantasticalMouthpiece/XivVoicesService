@@ -2,7 +2,7 @@
 
 namespace XivVoicesService.Models;
 
-public class ReportDbContext(DbContextOptions<ReportDbContext> options) : DbContext(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Report> Reports { get; set; }
 }
