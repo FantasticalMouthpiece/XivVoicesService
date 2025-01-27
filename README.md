@@ -9,14 +9,13 @@ This API's intention is to be brains behind maintaining player reports, characte
    - [Entity Framework .NET Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet):
      - `dotnet tool install --global dotnet-ef`
    - [Docker](https://www.docker.com/get-started/)
-2. Run the Postgres image to establish a database:
+2. Create your `.env` by copying `.env.sample`. Change any variables as necessary. Both the postgres image and the API will reference the `POSTGRES_` variables for database connection information.
+3. Run the Postgres image to establish a database:
    - `docker-compose up postgres`
-3. Create your `.env` by copying `.env.sample`. Change any variables as necessary. Both the postgres image and the API will reference the `POSTGRES_` variables for database connection information.
-
 4. Run the [DB Migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli):
    - `dotnet ef database update`
 5. Run the service:
-   - dotnet run --launch-profile http
+   - `dotnet run --launch-profile http`
 
 A swagger UI should open at this location: http://localhost:5260/swagger/index.html
 
